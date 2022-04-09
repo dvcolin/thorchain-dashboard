@@ -1,6 +1,11 @@
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { Container } from "./component-styles";
 
-const customTheme = extendTheme({});
+const customTheme = extendTheme({
+  components: {
+    Container,
+  },
+});
 
 interface ThemeProps {
   children: React.ReactNode;
