@@ -1,11 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import Theme from "./theme";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Theme>
+      <App />
+    </Theme>
   </React.StrictMode>,
   document.getElementById("root")
 );
