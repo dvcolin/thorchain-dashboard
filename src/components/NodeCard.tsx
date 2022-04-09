@@ -38,6 +38,7 @@ const NodeCard = ({
   current_award,
   slash_points,
   bond,
+  active_block_height,
 }: NodeCardProps) => {
   return (
     <Flex w="full" justify="space-between" bg="gray.50" p="4">
@@ -47,6 +48,10 @@ const NodeCard = ({
       <NodeCardPropertyGroup labelText="Rewards" value={current_award} />
       <NodeCardPropertyGroup labelText="Slash" value={slash_points} />
       <NodeCardPropertyGroup labelText="Bond" value={bond} />
+      <NodeCardPropertyGroup
+        labelText="Active Block"
+        value={active_block_height}
+      />
     </Flex>
   );
 };
