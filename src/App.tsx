@@ -9,10 +9,11 @@ import {
   TabPanel,
 } from "@chakra-ui/react";
 import NodeCardList from "./components/NodeCardList";
-import { NodeCardProps } from "./components/NodeCard";
+import { IThorNode } from "./types";
+import { filterNodesByStatus } from "./util";
 
 const App = () => {
-  const [nodes, setNodes] = useState<null | NodeCardProps[]>(null);
+  const [nodes, setNodes] = useState<[] | IThorNode[]>([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -29,37 +30,23 @@ const App = () => {
     fetchData();
   }, []);
 
-  let [activeNodes, standbyNodes, disabledNodes]: Array<
-    null | NodeCardProps[]
-  > = [null, null, null];
+  let [activeNodes, standbyNodes, disabledNodes]: Array<[] | IThorNode[]> = [
+    [],
+    [],
+    [],
+  ];
 
   if (nodes) {
-    const filteredNodes = nodes.reduce<Array<NodeCardProps[]>>(
-      (acc, cur) => {
-        if (cur.status === "Active") {
-          acc[0].push(cur);
-        } else if (
-          cur.status === "Standby" ||
-          cur.preflight_status.status === "Ready"
-        ) {
-          acc[1].push(cur);
-        } else if (cur.status === "Disabled") {
-          acc[2].push(cur);
-        }
-        return acc;
-      },
-      [[], [], []]
-    );
-    [activeNodes, standbyNodes, disabledNodes] = filteredNodes;
+    [activeNodes, standbyNodes, disabledNodes] = filterNodesByStatus(nodes);
   }
 
   return (
     <div>
-      <Container>
-        <Tabs variant="unstyled">
+      <Container py="8">
+        <Tabs variant="soft-rounded">
           <TabList>
             <Tab _selected={{ color: "white", bg: "green.500" }}>Active</Tab>
-            <Tab _selected={{ color: "white", bg: "yellow.500" }}>Ready</Tab>
+            <Tab _selected={{ color: "white", bg: "orange.500" }}>Ready</Tab>
             <Tab _selected={{ color: "white", bg: "red.500" }}>Disabled</Tab>
           </TabList>
 

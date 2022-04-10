@@ -1,35 +1,7 @@
-import { Flex } from "@chakra-ui/react";
-import NodeCardPropertyGroup from "./NodeCardPropertyGroup";
-
-export interface NodeCardProps {
-  node_address: string;
-  status: string;
-  pub_key_set: object;
-  validator_cons_pub_key: string;
-  bond: string;
-  active_block_height: number;
-  bond_address: string;
-  status_since: number;
-  signer_membership: null;
-  requested_to_leave: boolean;
-  forced_to_leave: boolean;
-  leave_height: number;
-  ip_address: string;
-  version: string;
-  slash_points: number;
-  jail: object;
-  current_award: string;
-  observe_chains: null;
-  preflight_status: {
-    status: string;
-    reason: string;
-    code: number;
-  };
-  bond_providers: {
-    node_operator_fee: string;
-    providers: null;
-  };
-}
+import { Flex, Text } from "@chakra-ui/react";
+import NodeCardProperty from "./NodeCardProperty";
+import { formatNodeAddress, formatNumber } from "../util";
+import { IThorNode } from "../types";
 
 const NodeCard = ({
   node_address,
@@ -39,19 +11,31 @@ const NodeCard = ({
   slash_points,
   bond,
   active_block_height,
-}: NodeCardProps) => {
+}: IThorNode) => {
   return (
-    <Flex w="full" justify="space-between" bg="whiteAlpha.100" p="4">
-      <NodeCardPropertyGroup labelText="Address" value={node_address} />
-      <NodeCardPropertyGroup labelText="Version" value={version} />
-      <NodeCardPropertyGroup labelText="IP" value={ip_address} />
-      <NodeCardPropertyGroup labelText="Rewards" value={current_award} />
-      <NodeCardPropertyGroup labelText="Slash" value={slash_points} />
-      <NodeCardPropertyGroup labelText="Bond" value={bond} />
-      <NodeCardPropertyGroup
-        labelText="Active Block"
-        value={active_block_height}
-      />
+    <Flex
+      w="full"
+      justify="space-between"
+      bg="whiteAlpha.100"
+      p="4"
+      cursor="pointer"
+      _notLast={{
+        borderBottomWidth: "1px",
+        borderBottomStyle: "solid",
+        borderBottomColor: "blackAlpha.500",
+      }}
+      _hover={{
+        bg: "whiteAlpha.300",
+      }}
+    >
+      <NodeCardProperty>{formatNodeAddress(node_address)}</NodeCardProperty>
+      <NodeCardProperty>{version}</NodeCardProperty>
+      <NodeCardProperty>{ip_address}</NodeCardProperty>
+      <NodeCardProperty>{formatNumber(current_award)}</NodeCardProperty>
+      <NodeCardProperty>{formatNumber(slash_points)}</NodeCardProperty>
+      <NodeCardProperty>{formatNumber(bond)}</NodeCardProperty>
+      <NodeCardProperty>{formatNumber(active_block_height)}</NodeCardProperty>
+      <NodeCardProperty>N/A</NodeCardProperty>
     </Flex>
   );
 };
