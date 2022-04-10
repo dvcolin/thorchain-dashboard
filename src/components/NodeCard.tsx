@@ -1,4 +1,4 @@
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import NodeCardProperty from "./NodeCardProperty";
 import { formatNodeAddress, formatNumber } from "../util";
 import { IThorNode } from "../types";
