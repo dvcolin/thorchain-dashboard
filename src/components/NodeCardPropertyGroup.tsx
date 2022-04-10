@@ -11,7 +11,7 @@ const NodeCardPropertyGroup = ({
 }: NodeCardPropertyGroupProps) => {
   return (
     <VStack align="flex-start">
-      <Tag colorScheme="blue">{labelText}</Tag>
+      <Tag colorScheme="green">{labelText}</Tag>
       <Text>{value}</Text>
     </VStack>
   );

@@ -41,7 +41,7 @@ const NodeCard = ({
   active_block_height,
 }: NodeCardProps) => {
   return (
-    <Flex w="full" justify="space-between" bg="gray.50" p="4">
+    <Flex w="full" justify="space-between" bg="whiteAlpha.100" p="4">
       <NodeCardPropertyGroup labelText="Address" value={node_address} />
       <NodeCardPropertyGroup labelText="Version" value={version} />
       <NodeCardPropertyGroup labelText="IP" value={ip_address} />
