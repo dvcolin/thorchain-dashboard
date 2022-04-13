@@ -2,11 +2,16 @@ import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { Container } from "./component-styles";
 
 const customTheme = extendTheme({
-  config: {
-    initialColorMode: "dark",
-  },
   components: {
     Container,
+  },
+  styles: {
+    global: {
+      body: {
+        bg: "gray.900",
+        color: "gray.300",
+      },
+    },
   },
 });
 

@@ -1,5 +1,5 @@
 export const formatNodeAddress = (address: string) => {
-  const formattedAddress = `${address.substring(0, 7)}...${address.substring(
+  const formattedAddress = `${address.substring(0, 6)}...${address.substring(
     address.length - 4
   )}`;
 

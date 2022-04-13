@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import NodeCardList from "./components/NodeCardList";
 import { IThorNode } from "./types";
-import { filterNodesByStatus } from "./util";
+import { filterNodesByStatus, sortNodesByBond } from "./util";
 
 const App = () => {
   const [nodes, setNodes] = useState<[] | IThorNode[]>([]);
@@ -49,16 +49,15 @@ const App = () => {
             <Tab _selected={{ color: "white", bg: "orange.500" }}>Ready</Tab>
             <Tab _selected={{ color: "white", bg: "red.500" }}>Disabled</Tab>
           </TabList>
-
           <TabPanels>
             <TabPanel>
-              <NodeCardList nodes={activeNodes} />
+              <NodeCardList nodes={sortNodesByBond(activeNodes)} />
             </TabPanel>
             <TabPanel>
-              <NodeCardList nodes={standbyNodes} />
+              <NodeCardList nodes={sortNodesByBond(standbyNodes)} />
             </TabPanel>
             <TabPanel>
-              <NodeCardList nodes={disabledNodes} />
+              <NodeCardList nodes={sortNodesByBond(disabledNodes)} />
             </TabPanel>
           </TabPanels>
         </Tabs>

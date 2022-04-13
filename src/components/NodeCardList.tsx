@@ -9,7 +9,7 @@ interface NodeCardListProps {
 
 const NodeCardList = ({ nodes }: NodeCardListProps) => {
   return (
-    <Flex direction="column" py="4">
+    <Flex direction="column">
       <Flex p="4" bg="gray.900">
         <NodeCardPropertyTitle>Address</NodeCardPropertyTitle>
         <NodeCardPropertyTitle>Version</NodeCardPropertyTitle>
@@ -17,7 +17,7 @@ const NodeCardList = ({ nodes }: NodeCardListProps) => {
         <NodeCardPropertyTitle>Rewards</NodeCardPropertyTitle>
         <NodeCardPropertyTitle>Slash</NodeCardPropertyTitle>
         <NodeCardPropertyTitle>Bond</NodeCardPropertyTitle>
-        <NodeCardPropertyTitle>Active Block</NodeCardPropertyTitle>
+        <NodeCardPropertyTitle>Age</NodeCardPropertyTitle>
         <NodeCardPropertyTitle>Churn Status</NodeCardPropertyTitle>
       </Flex>
       {nodes &&

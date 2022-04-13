@@ -1,6 +1,6 @@
 import { Flex } from "@chakra-ui/react";
 import NodeCardProperty from "./NodeCardProperty";
-import { formatNodeAddress, formatNumber } from "../util";
+import { formatNodeAddress, formatNumber, calculateBond } from "../util";
 import { IThorNode } from "../types";
 
 const NodeCard = ({
@@ -33,7 +33,7 @@ const NodeCard = ({
       <NodeCardProperty>{ip_address}</NodeCardProperty>
       <NodeCardProperty>{formatNumber(current_award)}</NodeCardProperty>
       <NodeCardProperty>{formatNumber(slash_points)}</NodeCardProperty>
-      <NodeCardProperty>{formatNumber(bond)}</NodeCardProperty>
+      <NodeCardProperty>{formatNumber(calculateBond(bond))}</NodeCardProperty>
       <NodeCardProperty>{formatNumber(active_block_height)}</NodeCardProperty>
       <NodeCardProperty>N/A</NodeCardProperty>
     </Flex>
