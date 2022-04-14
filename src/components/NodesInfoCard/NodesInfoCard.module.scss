@@ -1,0 +1,27 @@
+.nodesInfoCard {
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+.titleBox {
+  background-color: var(--color-node-card-bg--hover);
+  padding: var(--space-3);
+  border-radius: 0.6rem 0.6rem 0 0;
+}
+
+.title {
+  text-transform: uppercase;
+}
+
+.valueBox {
+  background-color: var(--color-node-card-bg);
+  font-size: 3.2rem;
+  padding: var(--space-3);
+  border-radius: 0 0 0.6rem 0.6rem;
+}
+
+.value {
+  font-weight: 700;
+  font-size: 2.8rem;
+}

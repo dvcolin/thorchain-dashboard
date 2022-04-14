@@ -1,0 +1,10 @@
+.nodeCardList {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  background-color: #080808;
+  padding: var(--space-4);
+}

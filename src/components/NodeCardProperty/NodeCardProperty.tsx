@@ -1,4 +1,5 @@
-import { Flex, Text } from "@chakra-ui/react";
+import styles from "./NodeCardProperty.module.scss";
+import Text from "../Text/Text";
 
 interface NodeCardPropertyProps {
   children: React.ReactNode;
@@ -6,9 +7,9 @@ interface NodeCardPropertyProps {
 
 const NodeCardProperty = ({ children }: NodeCardPropertyProps) => {
   return (
-    <Flex flex="1" justify="center">
+    <div className={styles.nodeCardProperty}>
       <Text>{children}</Text>
-    </Flex>
+    </div>
   );
 };
 

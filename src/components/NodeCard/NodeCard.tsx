@@ -1,7 +1,14 @@
-import { Flex } from "@chakra-ui/react";
-import NodeCardProperty from "./NodeCardProperty";
-import { formatNodeAddress, formatNumber, calculateBond } from "../util";
-import { IThorNode } from "../types";
+import { useContext } from "react";
+import NodeCardProperty from "../NodeCardProperty/NodeCardProperty";
+import styles from "./NodeCard.module.scss";
+import {
+  formatNodeAddress,
+  formatNumber,
+  calculateBond,
+  calculateAge,
+} from "../../util";
+import { IThorNode } from "../../types";
+import { AppContext } from "../../contexts/AppContextProvider";
 
 const NodeCard = ({
   node_address,
@@ -12,31 +19,21 @@ const NodeCard = ({
   bond,
   active_block_height,
 }: IThorNode) => {
+  const [data] = useContext(AppContext);
+  const { latestBlockHeight } = data;
   return (
-    <Flex
-      w="full"
-      justify="space-between"
-      bg="whiteAlpha.100"
-      p="4"
-      cursor="pointer"
-      _notLast={{
-        borderBottomWidth: "1px",
-        borderBottomStyle: "solid",
-        borderBottomColor: "blackAlpha.500",
-      }}
-      _hover={{
-        bg: "whiteAlpha.300",
-      }}
-    >
+    <div className={styles.nodeCard}>
       <NodeCardProperty>{formatNodeAddress(node_address)}</NodeCardProperty>
       <NodeCardProperty>{version}</NodeCardProperty>
       <NodeCardProperty>{ip_address}</NodeCardProperty>
       <NodeCardProperty>{formatNumber(current_award)}</NodeCardProperty>
       <NodeCardProperty>{formatNumber(slash_points)}</NodeCardProperty>
       <NodeCardProperty>{formatNumber(calculateBond(bond))}</NodeCardProperty>
-      <NodeCardProperty>{formatNumber(active_block_height)}</NodeCardProperty>
+      <NodeCardProperty>
+        {calculateAge(latestBlockHeight, active_block_height)}
+      </NodeCardProperty>
       <NodeCardProperty>N/A</NodeCardProperty>
-    </Flex>
+    </div>
   );
 };
 

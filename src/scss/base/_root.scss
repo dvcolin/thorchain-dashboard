@@ -1,0 +1,23 @@
+@use "../abstracts" as *;
+
+:root {
+  // COLORS
+  @each $property, $value in $colors {
+    --color-#{$property}: #{$value};
+  }
+
+  // FONT FAMILIES
+  @each $property, $value in $font-families {
+    --font-family-#{$property}: #{$value};
+  }
+
+  // FONT SIZES
+  @each $property, $value in $font-sizes {
+    --font-size-#{$property}: #{$value};
+  }
+
+  // SPACING
+  @for $i from 0 to 24 {
+    --space-#{$i}: #{0.4 * $i}rem;
+  }
+}

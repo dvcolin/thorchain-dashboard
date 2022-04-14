@@ -1,4 +1,5 @@
-import { Flex, Text } from "@chakra-ui/react";
+import Text from "../Text/Text";
+import styles from "./NodeCardPropertyTitle.module.scss";
 
 interface NodeCardPropertyTitleProps {
   children: React.ReactNode;
@@ -6,11 +7,9 @@ interface NodeCardPropertyTitleProps {
 
 const NodeCardPropertyTitle = ({ children }: NodeCardPropertyTitleProps) => {
   return (
-    <Flex flex="1" justify="center">
-      <Text fontSize="sm" textTransform="uppercase" fontWeight="bold">
-        {children}
-      </Text>
-    </Flex>
+    <div className={styles.nodeCardPropertyTitle}>
+      <Text>{children}</Text>
+    </div>
   );
 };
 
