@@ -20,7 +20,28 @@ const NodeCard = ({
   active_block_height,
 }: IThorNode) => {
   const [data] = useContext(AppContext);
-  const { latestBlockHeight } = data;
+  const {
+    latestBlockHeight,
+    lowestBondNode,
+    oldestNode,
+    highestSlashNode,
+    top5ReadyNodes,
+  } = data;
+
+  function displayChurnStatus() {
+    if (node_address === lowestBondNode?.node_address) {
+      return "LOW";
+    } else if (node_address === oldestNode?.node_address) {
+      return "OLD";
+    } else if (node_address === highestSlashNode?.node_address) {
+      return "BAD";
+    } else if (
+      top5ReadyNodes.find((node) => node.node_address === node_address)
+    ) {
+      return "IN";
+    }
+    return "---";
+  }
   return (
     <div className={styles.nodeCard}>
       <NodeCardProperty>{formatNodeAddress(node_address)}</NodeCardProperty>
@@ -32,7 +53,7 @@ const NodeCard = ({
       <NodeCardProperty>
         {calculateAge(latestBlockHeight, active_block_height)}
       </NodeCardProperty>
-      <NodeCardProperty>N/A</NodeCardProperty>
+      <NodeCardProperty>{displayChurnStatus()}</NodeCardProperty>
     </div>
   );
 };

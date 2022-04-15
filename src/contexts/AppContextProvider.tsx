@@ -6,6 +6,7 @@ import {
   SetStateAction,
 } from "react";
 import axios from "axios";
+import { sortNodesByBond } from "../util";
 import { IThorNode } from "../types";
 
 interface AppContextState {
@@ -14,6 +15,10 @@ interface AppContextState {
   readyNodes: IThorNode[] | [];
   disabledNodes: IThorNode[] | [];
   latestBlockHeight: number | null;
+  lowestBondNode: IThorNode | null;
+  oldestNode: IThorNode | null;
+  highestSlashNode: IThorNode | null;
+  top5ReadyNodes: IThorNode[] | [];
 }
 
 export const AppContext = createContext<
@@ -25,6 +30,10 @@ export const AppContext = createContext<
     readyNodes: [],
     disabledNodes: [],
     latestBlockHeight: null,
+    lowestBondNode: null,
+    oldestNode: null,
+    highestSlashNode: null,
+    top5ReadyNodes: [],
   },
   () => {},
 ]);
@@ -40,6 +49,10 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
     readyNodes: [],
     disabledNodes: [],
     latestBlockHeight: null,
+    lowestBondNode: null,
+    oldestNode: null,
+    highestSlashNode: null,
+    top5ReadyNodes: [],
   });
 
   async function fetchData() {
@@ -69,12 +82,35 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
         },
         [[], [], []]
       );
+
+      // Find lowest bond, oldest, and highest slash node
+      const firstNode = activeNodes[0];
+      const [lowestBondNode, oldestNode, highestSlashNode] = activeNodes.reduce<
+        Array<IThorNode>
+      >(
+        (acc, cur) => {
+          if (+cur.bond < +acc[0].bond) {
+            acc[0] = cur;
+          } else if (cur.status_since > acc[1].status_since) {
+            acc[1] = cur;
+          } else if (cur.slash_points > acc[2].slash_points) {
+            acc[2] = cur;
+          }
+          return acc;
+        },
+        [firstNode, firstNode, firstNode]
+      );
+
       setData({
         nodes: nodesData.data,
         activeNodes,
         readyNodes,
         disabledNodes,
         latestBlockHeight: latestBlockHeightData.data[0].thorchain,
+        lowestBondNode,
+        oldestNode,
+        highestSlashNode,
+        top5ReadyNodes: sortNodesByBond(readyNodes).slice(0, 5),
       });
     } catch (err) {
       console.log(err);

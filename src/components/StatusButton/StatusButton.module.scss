@@ -1,0 +1,41 @@
+.statusButton {
+  border: none;
+  padding: var(--space-2) var(--space-4);
+  border-radius: 0.4rem;
+  color: white;
+  cursor: pointer;
+  font-size: 1.4rem;
+  font-family: var(--font-family-body);
+  transition: all 150ms;
+
+  &:not(:last-child) {
+    margin-right: var(--space-3);
+  }
+}
+
+.active {
+  background-color: #38a169;
+
+  &:hover,
+  &--active {
+    background-color: #2f855a;
+  }
+}
+
+.ready {
+  background-color: #d69e2e;
+
+  &:hover,
+  &--active {
+    background-color: #b7791f;
+  }
+}
+
+.disabled {
+  background-color: #e53e3e;
+
+  &:hover,
+  &--active {
+    background-color: #c53030;
+  }
+}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import AppContextProvider from "./contexts/AppContextProvider";
 import Container from "./components/Container/Container";
+import StatusButton from "./components/StatusButton/StatusButton";
 import NodeCardList from "./components/NodeCardList/NodeCardList";
 import NodesInfoCardsGrid from "./components/NodesInfoCardsGrid/NodesInfoCardsGrid";
 
@@ -12,11 +13,27 @@ const App = () => {
     <AppContextProvider>
       <Container>
         <NodesInfoCardsGrid />
-        <button onClick={() => setDisplayedNodeStatus("active")}>Active</button>
-        <button onClick={() => setDisplayedNodeStatus("ready")}>Standby</button>
-        <button onClick={() => setDisplayedNodeStatus("disabled")}>
+        <StatusButton
+          variant="active"
+          isActive={displayedNodeStatus === "active"}
+          onClick={() => setDisplayedNodeStatus("active")}
+        >
+          Active
+        </StatusButton>
+        <StatusButton
+          variant="ready"
+          isActive={displayedNodeStatus === "ready"}
+          onClick={() => setDisplayedNodeStatus("ready")}
+        >
+          Standby
+        </StatusButton>
+        <StatusButton
+          variant="disabled"
+          isActive={displayedNodeStatus === "disabled"}
+          onClick={() => setDisplayedNodeStatus("disabled")}
+        >
           Disabled
-        </button>
+        </StatusButton>
         <NodeCardList status={displayedNodeStatus} />
       </Container>
     </AppContextProvider>
