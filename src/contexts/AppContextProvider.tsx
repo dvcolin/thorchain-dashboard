@@ -13,7 +13,7 @@ interface AppContextState {
   nodes: IThorNode[] | [];
   activeNodes: IThorNode[] | [];
   readyNodes: IThorNode[] | [];
-  disabledNodes: IThorNode[] | [];
+  standbyNodes: IThorNode[] | [];
   latestBlockHeight: number | null;
   lowestBondNode: IThorNode | null;
   oldestNode: IThorNode | null;
@@ -28,7 +28,7 @@ export const AppContext = createContext<
     nodes: [],
     activeNodes: [],
     readyNodes: [],
-    disabledNodes: [],
+    standbyNodes: [],
     latestBlockHeight: null,
     lowestBondNode: null,
     oldestNode: null,
@@ -47,7 +47,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
     nodes: [],
     activeNodes: [],
     readyNodes: [],
-    disabledNodes: [],
+    standbyNodes: [],
     latestBlockHeight: null,
     lowestBondNode: null,
     oldestNode: null,
@@ -67,15 +67,21 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
       );
 
       // Filter nodes by status
-      const [activeNodes, readyNodes, disabledNodes] = nodesData.data.reduce<
+      const [activeNodes, readyNodes, standbyNodes] = nodesData.data.reduce<
         Array<IThorNode[]>
       >(
         (acc, cur) => {
           if (cur.status === "Active") {
             acc[0].push(cur);
-          } else if (cur.status === "Standby") {
+          } else if (
+            cur.status === "Standby" &&
+            cur.preflight_status.status === "Ready"
+          ) {
             acc[1].push(cur);
-          } else if (cur.status === "Disabled") {
+          } else if (
+            cur.status === "Standby" &&
+            cur.preflight_status.status === "Standby"
+          ) {
             acc[2].push(cur);
           }
           return acc;
@@ -105,7 +111,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
         nodes: nodesData.data,
         activeNodes,
         readyNodes,
-        disabledNodes,
+        standbyNodes,
         latestBlockHeight: latestBlockHeightData.data[0].thorchain,
         lowestBondNode,
         oldestNode,
