@@ -1,3 +1,8 @@
+interface IObserveChain {
+  chain: string;
+  height: number;
+}
+
 export interface IThorNode {
   node_address: string;
   status: string;
@@ -16,7 +21,7 @@ export interface IThorNode {
   slash_points: number;
   jail: object;
   current_award: string;
-  observe_chains: null;
+  observe_chains: IObserveChain[];
   preflight_status: {
     status: string;
     reason: string;

@@ -1,5 +1,13 @@
 .nodeCardProperty {
-  flex: 1;
-  display: flex;
-  justify-content: center;
+  padding: var(--space-1) var(--space-2);
+  text-align: right;
+}
+
+.centered {
+  text-align: center;
+}
+
+.nodeNumberCell {
+  background-color: var(--color-node-card-list-header-bg);
+  font-weight: 700;
 }

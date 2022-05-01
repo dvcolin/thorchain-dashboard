@@ -1,11 +1,9 @@
 .nodeCardList {
-  display: flex;
-  flex-direction: column;
+  width: 100%;
   margin-top: var(--space-8);
 }
 
 .header {
-  display: flex;
-  background-color: #080808;
   padding: var(--space-4);
+  background-color: var(--color-node-card-list-header-bg);
 }

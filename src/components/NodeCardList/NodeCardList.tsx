@@ -10,23 +10,24 @@ interface NodeCardListProps {
 
 const NodeCardList = ({ nodes }: NodeCardListProps) => {
   return (
-    <div className={styles.nodeCardList}>
-      <div className={styles.header}>
-        <NodeCardPropertyTitle>Address</NodeCardPropertyTitle>
-        <NodeCardPropertyTitle>Version</NodeCardPropertyTitle>
+    <table className={styles.nodeCardList}>
+      <tr className={styles.header}>
+        <td></td>
+        <NodeCardPropertyTitle>Node</NodeCardPropertyTitle>
         <NodeCardPropertyTitle>IP</NodeCardPropertyTitle>
+        <NodeCardPropertyTitle>Age</NodeCardPropertyTitle>
+        <NodeCardPropertyTitle>Bond</NodeCardPropertyTitle>
         <NodeCardPropertyTitle>Rewards</NodeCardPropertyTitle>
         <NodeCardPropertyTitle>Slash</NodeCardPropertyTitle>
-        <NodeCardPropertyTitle>Bond</NodeCardPropertyTitle>
-        <NodeCardPropertyTitle>Age (Days)</NodeCardPropertyTitle>
-        <NodeCardPropertyTitle>Churn Status</NodeCardPropertyTitle>
-      </div>
+        <NodeCardPropertyTitle>Version</NodeCardPropertyTitle>
+        <NodeCardPropertyTitle centered>Churn Status</NodeCardPropertyTitle>
+      </tr>
       {nodes.length
-        ? sortNodesByBond(nodes).map((node) => (
-            <NodeCard key={node.node_address} {...node} />
+        ? sortNodesByBond(nodes).map((node, idx) => (
+            <NodeCard key={node.node_address} idx={idx + 1} {...node} />
           ))
         : null}
-    </div>
+    </table>
   );
 };
 

@@ -10,7 +10,12 @@ import {
 import { IThorNode } from "../../types";
 import { AppContext } from "../../contexts/AppContextProvider";
 
+interface INodeCard extends IThorNode {
+  idx: number;
+}
+
 const NodeCard = ({
+  idx,
   node_address,
   version,
   ip_address,
@@ -18,7 +23,7 @@ const NodeCard = ({
   slash_points,
   bond,
   active_block_height,
-}: IThorNode) => {
+}: INodeCard) => {
   const [data] = useContext(AppContext);
   const {
     latestBlockHeight,
@@ -40,21 +45,26 @@ const NodeCard = ({
     ) {
       return "IN";
     }
-    return "---";
+    return "*";
   }
+
   return (
-    <div className={styles.nodeCard}>
+    <tr className={styles.nodeCard}>
+      <NodeCardProperty centered nodeNumberCell>
+        {idx}
+      </NodeCardProperty>
       <NodeCardProperty>{formatNodeAddress(node_address)}</NodeCardProperty>
-      <NodeCardProperty>{version}</NodeCardProperty>
       <NodeCardProperty>{ip_address}</NodeCardProperty>
-      <NodeCardProperty>{formatNumber(current_award)}</NodeCardProperty>
-      <NodeCardProperty>{formatNumber(slash_points)}</NodeCardProperty>
-      <NodeCardProperty>{formatNumber(calculateBond(bond))}</NodeCardProperty>
       <NodeCardProperty>
         {calculateAge(latestBlockHeight, active_block_height)}
       </NodeCardProperty>
-      <NodeCardProperty>{displayChurnStatus()}</NodeCardProperty>
-    </div>
+      <NodeCardProperty>{formatNumber(calculateBond(bond))}</NodeCardProperty>
+      <NodeCardProperty>{formatNumber(current_award)}</NodeCardProperty>
+      <NodeCardProperty>{formatNumber(slash_points)}</NodeCardProperty>
+      <NodeCardProperty>{version}</NodeCardProperty>
+      {}
+      <NodeCardProperty centered>{displayChurnStatus()}</NodeCardProperty>
+    </tr>
   );
 };
 

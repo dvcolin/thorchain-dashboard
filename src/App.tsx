@@ -1,16 +1,20 @@
+import { Helmet } from "react-helmet";
 import AppContextProvider from "./contexts/AppContextProvider";
 import Container from "./components/Container/Container";
-import NodesInfoCardsGrid from "./components/NodesInfoCardsGrid/NodesInfoCardsGrid";
 import NodeCardLists from "./components/NodeCardLists/NodeCardLists";
 
 const App = () => {
   return (
-    <AppContextProvider>
-      <Container>
-        <NodesInfoCardsGrid />
-        <NodeCardLists />
-      </Container>
-    </AppContextProvider>
+    <>
+      <Helmet>
+        <title>THORmon</title>
+      </Helmet>
+      <AppContextProvider>
+        <Container>
+          <NodeCardLists />
+        </Container>
+      </AppContextProvider>
+    </>
   );
 };
 

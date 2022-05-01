@@ -1,8 +1,15 @@
 .nodeCardPropertyTitle {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  font-size: 1.4rem;
-  text-transform: uppercase;
+  font-family: var(--font-size-node-card-property-title);
   font-weight: 700;
+  text-transform: uppercase;
+  text-align: right;
+  padding: var(--space-1) var(--space-2);
+}
+
+.nodeCardPropertyTitleText {
+  font-size: var(--font-size-node-card-property-title-text);
+}
+
+.centered {
+  text-align: center;
 }

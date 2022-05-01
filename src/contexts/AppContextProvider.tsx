@@ -89,7 +89,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
         [[], [], []]
       );
 
-      // Find lowest bond, oldest, and highest slash node
+      // Find lowest bond, oldest, highest slash node, and maximum block height node
       const firstNode = activeNodes[0];
       const [lowestBondNode, oldestNode, highestSlashNode] = activeNodes.reduce<
         Array<IThorNode>

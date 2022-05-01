@@ -1,7 +1,11 @@
+$lightGray: #f4f6f8;
+$veryDarkBlue: #19202d;
+$white: #ffffff;
+$gray: #c2c8ce;
+
 $colors: (
-  body-bg: #181818,
-  body-text: #ccc,
-  node-card-bg: rgba(255, 255, 255, 0.04),
-  node-card-bg--hover: rgba(255, 255, 255, 0.07),
-  node-card-border: rgba(0, 0, 0, 0.3),
+  body-bg: $lightGray,
+  body-text: $veryDarkBlue,
+  node-card-bg: $white,
+  node-card-list-header-bg: $gray,
 );
