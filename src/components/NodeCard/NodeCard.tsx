@@ -6,6 +6,7 @@ import {
   formatNumber,
   calculateBond,
   calculateAge,
+  calculateRewards,
 } from "../../util";
 import { IThorNode } from "../../types";
 import { AppContext } from "../../contexts/AppContextProvider";
@@ -78,7 +79,7 @@ const NodeCard = ({
         {calculateAge(latestBlockHeight, active_block_height)}
       </NodeCardProperty>
       <NodeCardProperty>{formatNumber(calculateBond(bond))}</NodeCardProperty>
-      <NodeCardProperty>{formatNumber(current_award)}</NodeCardProperty>
+      <NodeCardProperty>{calculateRewards(current_award)}</NodeCardProperty>
       <NodeCardProperty>{formatNumber(slash_points)}</NodeCardProperty>
       <NodeCardProperty>{version}</NodeCardProperty>
       {isActiveNode ? (
