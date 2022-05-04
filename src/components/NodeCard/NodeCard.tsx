@@ -79,7 +79,9 @@ const NodeCard = ({
         {calculateAge(latestBlockHeight, active_block_height)}
       </NodeCardProperty>
       <NodeCardProperty>{formatNumber(calculateBond(bond))}</NodeCardProperty>
-      <NodeCardProperty>{calculateRewards(current_award)}</NodeCardProperty>
+      {isActiveNode ? (
+        <NodeCardProperty>{calculateRewards(current_award)}</NodeCardProperty>
+      ) : null}
       <NodeCardProperty>{formatNumber(slash_points)}</NodeCardProperty>
       <NodeCardProperty>{version}</NodeCardProperty>
       {isActiveNode ? (

@@ -19,7 +19,9 @@ const NodeCardList = ({ nodes, isActiveNodeList }: NodeCardListProps) => {
           <NodeCardPropertyTitle>IP</NodeCardPropertyTitle>
           <NodeCardPropertyTitle>Age</NodeCardPropertyTitle>
           <NodeCardPropertyTitle>Bond</NodeCardPropertyTitle>
-          <NodeCardPropertyTitle>Rewards</NodeCardPropertyTitle>
+          {isActiveNodeList ? (
+            <NodeCardPropertyTitle>Rewards</NodeCardPropertyTitle>
+          ) : null}
           <NodeCardPropertyTitle>Slash</NodeCardPropertyTitle>
           <NodeCardPropertyTitle>Version</NodeCardPropertyTitle>
           {isActiveNodeList ? (
