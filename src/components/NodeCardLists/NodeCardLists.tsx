@@ -7,7 +7,7 @@ const NodeCardLists = () => {
   const { activeNodes, readyNodes, standbyNodes } = data;
   return (
     <div>
-      <NodeCardList nodes={activeNodes} />
+      <NodeCardList isActiveNodeList nodes={activeNodes} />
       <NodeCardList nodes={readyNodes} />
       <NodeCardList nodes={standbyNodes} />
     </div>

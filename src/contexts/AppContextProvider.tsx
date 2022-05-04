@@ -19,6 +19,15 @@ interface AppContextState {
   oldestNode: IThorNode | null;
   highestSlashNode: IThorNode | null;
   top5ReadyNodes: IThorNode[] | [];
+  maxHeights: {
+    BNB: number | null;
+    BTC: number | null;
+    ETH: number | null;
+    LTC: number | null;
+    BCH: number | null;
+    DOGE: number | null;
+    TERRA: number | null;
+  };
 }
 
 export const AppContext = createContext<
@@ -34,6 +43,15 @@ export const AppContext = createContext<
     oldestNode: null,
     highestSlashNode: null,
     top5ReadyNodes: [],
+    maxHeights: {
+      BNB: null,
+      BTC: null,
+      ETH: null,
+      LTC: null,
+      BCH: null,
+      DOGE: null,
+      TERRA: null,
+    },
   },
   () => {},
 ]);
@@ -53,6 +71,15 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
     oldestNode: null,
     highestSlashNode: null,
     top5ReadyNodes: [],
+    maxHeights: {
+      BNB: null,
+      BTC: null,
+      ETH: null,
+      LTC: null,
+      BCH: null,
+      DOGE: null,
+      TERRA: null,
+    },
   });
 
   async function fetchData() {
@@ -107,6 +134,42 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
         [firstNode, firstNode, firstNode]
       );
 
+      let maxBTCHeight = 0;
+      let maxETHHeight = 0;
+      let maxLTCHeight = 0;
+      let maxDOGEHeight = 0;
+      let maxBCHHeight = 0;
+      let maxBNBHeight = 0;
+      let maxTERRAHeight = 0;
+
+      activeNodes.forEach((node) => {
+        if (node.observe_chains) {
+          node.observe_chains.forEach((obj) => {
+            if (obj.chain === "BTC" && obj.height > maxBTCHeight) {
+              maxBTCHeight = obj.height;
+            }
+            if (obj.chain === "ETH" && obj.height > maxETHHeight) {
+              maxETHHeight = obj.height;
+            }
+            if (obj.chain === "LTC" && obj.height > maxLTCHeight) {
+              maxLTCHeight = obj.height;
+            }
+            if (obj.chain === "DOGE" && obj.height > maxDOGEHeight) {
+              maxDOGEHeight = obj.height;
+            }
+            if (obj.chain === "BCH" && obj.height > maxBCHHeight) {
+              maxBCHHeight = obj.height;
+            }
+            if (obj.chain === "BNB" && obj.height > maxBNBHeight) {
+              maxBNBHeight = obj.height;
+            }
+            if (obj.chain === "TERRA" && obj.height > maxTERRAHeight) {
+              maxTERRAHeight = obj.height;
+            }
+          });
+        }
+      });
+
       setData({
         nodes: nodesData.data,
         activeNodes,
@@ -117,6 +180,15 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
         oldestNode,
         highestSlashNode,
         top5ReadyNodes: sortNodesByBond(readyNodes).slice(0, 5),
+        maxHeights: {
+          BNB: maxBNBHeight,
+          BTC: maxBTCHeight,
+          ETH: maxETHHeight,
+          LTC: maxLTCHeight,
+          BCH: maxBCHHeight,
+          DOGE: maxDOGEHeight,
+          TERRA: maxTERRAHeight,
+        },
       });
     } catch (err) {
       console.log(err);

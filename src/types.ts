@@ -21,7 +21,7 @@ export interface IThorNode {
   slash_points: number;
   jail: object;
   current_award: string;
-  observe_chains: IObserveChain[];
+  observe_chains: IObserveChain[] | null;
   preflight_status: {
     status: string;
     reason: string;

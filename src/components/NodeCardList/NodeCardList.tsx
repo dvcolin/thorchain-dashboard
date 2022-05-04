@@ -6,27 +6,48 @@ import { IThorNode } from "../../types";
 
 interface NodeCardListProps {
   nodes: IThorNode[];
+  isActiveNodeList?: boolean;
 }
 
-const NodeCardList = ({ nodes }: NodeCardListProps) => {
+const NodeCardList = ({ nodes, isActiveNodeList }: NodeCardListProps) => {
   return (
     <table className={styles.nodeCardList}>
-      <tr className={styles.header}>
-        <td></td>
-        <NodeCardPropertyTitle>Node</NodeCardPropertyTitle>
-        <NodeCardPropertyTitle>IP</NodeCardPropertyTitle>
-        <NodeCardPropertyTitle>Age</NodeCardPropertyTitle>
-        <NodeCardPropertyTitle>Bond</NodeCardPropertyTitle>
-        <NodeCardPropertyTitle>Rewards</NodeCardPropertyTitle>
-        <NodeCardPropertyTitle>Slash</NodeCardPropertyTitle>
-        <NodeCardPropertyTitle>Version</NodeCardPropertyTitle>
-        <NodeCardPropertyTitle centered>Churn Status</NodeCardPropertyTitle>
-      </tr>
-      {nodes.length
-        ? sortNodesByBond(nodes).map((node, idx) => (
-            <NodeCard key={node.node_address} idx={idx + 1} {...node} />
-          ))
-        : null}
+      <thead className={styles.header}>
+        <tr>
+          <th></th>
+          <NodeCardPropertyTitle>Node</NodeCardPropertyTitle>
+          <NodeCardPropertyTitle>IP</NodeCardPropertyTitle>
+          <NodeCardPropertyTitle>Age</NodeCardPropertyTitle>
+          <NodeCardPropertyTitle>Bond</NodeCardPropertyTitle>
+          <NodeCardPropertyTitle>Rewards</NodeCardPropertyTitle>
+          <NodeCardPropertyTitle>Slash</NodeCardPropertyTitle>
+          <NodeCardPropertyTitle>Version</NodeCardPropertyTitle>
+          {isActiveNodeList ? (
+            <>
+              <NodeCardPropertyTitle centered>BNB</NodeCardPropertyTitle>
+              <NodeCardPropertyTitle centered>BTC</NodeCardPropertyTitle>
+              <NodeCardPropertyTitle centered>ETH</NodeCardPropertyTitle>
+              <NodeCardPropertyTitle centered>LTC</NodeCardPropertyTitle>
+              <NodeCardPropertyTitle centered>BCH</NodeCardPropertyTitle>
+              <NodeCardPropertyTitle centered>DOGE</NodeCardPropertyTitle>
+              <NodeCardPropertyTitle centered>TERRA</NodeCardPropertyTitle>
+            </>
+          ) : null}
+          <NodeCardPropertyTitle centered>Churn Status</NodeCardPropertyTitle>
+        </tr>
+      </thead>
+      <tbody>
+        {nodes.length
+          ? sortNodesByBond(nodes).map((node, idx) => (
+              <NodeCard
+                key={node.node_address}
+                idx={idx + 1}
+                isActiveNode={isActiveNodeList}
+                {...node}
+              />
+            ))
+          : null}
+      </tbody>
     </table>
   );
 };
