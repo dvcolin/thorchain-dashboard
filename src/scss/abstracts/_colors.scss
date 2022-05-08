@@ -2,10 +2,12 @@ $lightGray: #f4f6f8;
 $veryDarkBlue: #19202d;
 $white: #ffffff;
 $gray: #c2c8ce;
+$red: red;
 
 $colors: (
   body-bg: $lightGray,
   body-text: $veryDarkBlue,
   node-card-bg: $white,
   node-card-list-header-bg: $gray,
+  error: $red,
 );

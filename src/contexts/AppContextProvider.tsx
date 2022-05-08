@@ -20,13 +20,13 @@ interface AppContextState {
   highestSlashNode: IThorNode | null;
   top5ReadyNodes: IThorNode[] | [];
   maxHeights: {
-    BNB: number | null;
-    BTC: number | null;
-    ETH: number | null;
-    LTC: number | null;
-    BCH: number | null;
-    DOGE: number | null;
-    TERRA: number | null;
+    BNB: number;
+    BTC: number;
+    ETH: number;
+    LTC: number;
+    BCH: number;
+    DOGE: number;
+    TERRA: number;
   };
 }
 
@@ -44,13 +44,13 @@ export const AppContext = createContext<
     highestSlashNode: null,
     top5ReadyNodes: [],
     maxHeights: {
-      BNB: null,
-      BTC: null,
-      ETH: null,
-      LTC: null,
-      BCH: null,
-      DOGE: null,
-      TERRA: null,
+      BNB: 0,
+      BTC: 0,
+      ETH: 0,
+      LTC: 0,
+      BCH: 0,
+      DOGE: 0,
+      TERRA: 0,
     },
   },
   () => {},
@@ -72,13 +72,13 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
     highestSlashNode: null,
     top5ReadyNodes: [],
     maxHeights: {
-      BNB: null,
-      BTC: null,
-      ETH: null,
-      LTC: null,
-      BCH: null,
-      DOGE: null,
-      TERRA: null,
+      BNB: 0,
+      BTC: 0,
+      ETH: 0,
+      LTC: 0,
+      BCH: 0,
+      DOGE: 0,
+      TERRA: 0,
     },
   });
 

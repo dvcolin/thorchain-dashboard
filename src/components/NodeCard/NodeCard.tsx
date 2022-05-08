@@ -8,7 +8,7 @@ import {
   calculateAge,
   calculateRewards,
 } from "../../util";
-import { IThorNode } from "../../types";
+import { IThorNode, ChainKey } from "../../types";
 import { AppContext } from "../../contexts/AppContextProvider";
 
 interface INodeCard extends IThorNode {
@@ -38,15 +38,14 @@ const NodeCard = ({
     maxHeights,
   } = data;
 
-  function displayChainStatus(chain: string) {
+  function displayChainStatus(chain: ChainKey) {
     const obj = observe_chains?.find((n) => n.chain === chain);
     if (obj) {
-      // @ts-ignore
       if (obj.height < maxHeights[chain] - 10) {
-        //@ts-ignore
-        return obj.height - maxHeights[chain];
+        const num = obj.height - maxHeights[chain];
+        return <span className={styles.negativeChainStatus}>{num}</span>;
       } else {
-        return "OK";
+        return <span>OK</span>;
       }
     }
 

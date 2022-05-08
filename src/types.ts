@@ -1,5 +1,7 @@
+export type ChainKey = "BNB" | "BTC" | "ETH" | "LTC" | "BCH" | "DOGE" | "TERRA";
+
 interface IObserveChain {
-  chain: string;
+  chain: ChainKey;
   height: number;
 }
 
