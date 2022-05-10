@@ -4,3 +4,4 @@ export { calculateBond } from "./calculateBond";
 export { sortNodesByBond } from "./sortNodesByBond";
 export { calculateAge } from "./calculateAge";
 export { calculateRewards } from "./calculateRewards";
+export { formatNextChurnTime } from "./formatNextChurnTime";

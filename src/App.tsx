@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet";
 import AppContextProvider from "./contexts/AppContextProvider";
 import Container from "./components/Container/Container";
 import NodeCardLists from "./components/NodeCardLists/NodeCardLists";
+import NextChurnTimeDisplay from "./components/NextChurnTimeDisplay/NextChurnTimeDisplay";
 
 const App = () => {
   return (
@@ -11,6 +12,7 @@ const App = () => {
       </Helmet>
       <AppContextProvider>
         <Container>
+          <NextChurnTimeDisplay />
           <NodeCardLists />
         </Container>
       </AppContextProvider>

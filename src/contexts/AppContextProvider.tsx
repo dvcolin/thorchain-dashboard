@@ -14,6 +14,7 @@ interface AppContextState {
   activeNodes: IThorNode[] | [];
   readyNodes: IThorNode[] | [];
   standbyNodes: IThorNode[] | [];
+  nextChurnTime: number;
   latestBlockHeight: number | null;
   lowestBondNode: IThorNode | null;
   oldestNode: IThorNode | null;
@@ -38,6 +39,7 @@ export const AppContext = createContext<
     activeNodes: [],
     readyNodes: [],
     standbyNodes: [],
+    nextChurnTime: 0,
     latestBlockHeight: null,
     lowestBondNode: null,
     oldestNode: null,
@@ -66,6 +68,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
     activeNodes: [],
     readyNodes: [],
     standbyNodes: [],
+    nextChurnTime: 0,
     latestBlockHeight: null,
     lowestBondNode: null,
     oldestNode: null,
@@ -93,6 +96,12 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
         "https://thornode.ninerealms.com/thorchain/lastblock/THORCHAIN"
       );
 
+      const constants = await axios.get(
+        "https://thornode.ninerealms.com/thorchain/constants"
+      );
+
+      const status = await axios.get("https://rpc.ninerealms.com/status");
+
       // Filter nodes by status
       const [activeNodes, readyNodes, standbyNodes] = nodesData.data.reduce<
         Array<IThorNode[]>
@@ -115,6 +124,25 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
         },
         [[], [], []]
       );
+
+      // Next churn time
+      let newestActiveNode = activeNodes[0];
+
+      activeNodes.forEach((node) => {
+        if (node.active_block_height > newestActiveNode.active_block_height) {
+          newestActiveNode = node;
+        }
+      });
+
+      const nextChurnBlock =
+        newestActiveNode.active_block_height +
+        constants.data.int_64_values.ChurnInterval;
+      console.log(nextChurnBlock);
+
+      const latestBlockHeight =
+        status.data.result.sync_info.latest_block_height;
+
+      const nextChurnTime = (nextChurnBlock - latestBlockHeight) * 6000;
 
       // Find lowest bond, oldest, highest slash node, and maximum block height node
       const firstNode = activeNodes[0];
@@ -175,6 +203,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
         activeNodes,
         readyNodes,
         standbyNodes,
+        nextChurnTime,
         latestBlockHeight: latestBlockHeightData.data[0].thorchain,
         lowestBondNode,
         oldestNode,
